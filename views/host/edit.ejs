@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOST-ADD</title>
+</head>
+<body style="margin: 0; padding: 40px; font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4;">
+  <%- include("../partials/navBar") %>
+
+  <form action="/host/<%= editing ? 'edit' : '' %>" method="POST" style="max-width: 600px; margin: auto; padding: 30px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.1);">
+
+    <input type="hidden" name="id" value="<%= editing ? item.id : '' %>">
+
+    <h2 style="text-align: center; font-size: 1.8rem; font-weight: 600; color: #1c1c1c; margin-bottom: 30px; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
+      🏠 <%= editing ? 'Edit Property' : 'Add Property' %>
+    </h2>
+
+    <label style="font-weight: 500;">Property Title</label>
+    <input type="text" name="title" value="<%= editing ? item.title : '' %>" style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px;">
+
+    <label style="font-weight: 500;">Location</label>
+    <input type="text" name="location" value="<%= editing ? item.location : '' %>" style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px;">
+
+    <label style="font-weight: 500;">Price (INR)</label>
+    <input type="number" name="price" value="<%= editing ? item.price : '' %>" style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px;">
+
+    <label style="font-weight: 500;">Type</label>
+    <select name="type" style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px;">
+      <option value="">-- Select --</option>
+      <option value="rent" <%= editing && item.type === 'rent' ? 'selected' : '' %>>Rent</option>
+      <option value="buy" <%= editing && item.type === 'buy' ? 'selected' : '' %>>Buy</option>
+    </select>
+
+    <label style="font-weight: 500;">Description</label>
+    <textarea name="description" rows="4" style="width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px;"><%= editing ? item.description : '' %></textarea>
+
+    <label style="font-weight: 500;">Photo URL</label>
+    <input type="text" name="photo" value="<%= editing ? item.photo : '' %>" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 10px; margin-bottom: 24px; border: 1px solid #ccc; border-radius: 6px;">
+
+    <button type="submit" style="width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-weight: 500; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
+  <%= editing ? '🔄 Update Property' : '✅ Add Property' %>
+</button>
+  </form>
+</body>
+</html>

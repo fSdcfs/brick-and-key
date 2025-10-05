@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STORE</title>
+</head>
+<%- include("../partials/navBar") %>
+<body style="margin: 0; padding: 20px; font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4;">
+
+  <h1 style="text-align: center; margin-bottom: 30px;">
+    🛒 You have <span style="color: #007bff;"><%= Cart.length %></span> item<%= Cart.length > 1 ? 's' : '' %> in your cart
+  </h1>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <% Cart.forEach(item => { %>
+      <div style="width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 16px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        
+        <img src="<%= item.photo %>" alt="Property Image" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 12px;">
+
+        <h3 style="margin-top: 0; color: #333;"><%= item.title %></h3>
+        <p style="margin: 6px 0; color: #666;"><strong>📍 Location:</strong> <%= item.location %></p>
+        <p style="margin: 6px 0; color: #666;"><strong>💰 Price:</strong> ₹<%= item.price %></p>
+        <p style="margin: 6px 0; color: #666;"><strong>🏷️ Type:</strong> <%= item.type %></p>
+        <p style="margin: 6px 0; color: #666;"><strong>📝 Description:</strong> <%= item.description %></p>
+        <% console.log("🧪 Cart item:", item) %>
+       <form action="/cart/delete/<%= item.home_id %>" method="POST" onsubmit="return confirmDelete(event, '<%= item.title %>')">
+  <button type="submit" style="background-color: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">
+    🗑️ Delete
+  </button>
+</form>
+
+<script>
+  function confirmDelete(e, title) {
+    e.preventDefault(); // Stop form from auto-submitting
+
+    const confirmed = window.confirm(`⚠️ Are you sure you want to delete "${title}" from your Cart?`);
+
+    if (confirmed) {
+      e.target.submit(); // Manually submit if confirmed
+    }
+    return false; // Prevent default either way
+  }
+</script>
+
+
+<!-- buy -->
+      <form action="/buy/<%= item.home_id %>" method="GET">
+  <button type="submit" style="background-color: #ffc107; color: #1c1c1c; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">
+    🛒 Buy
+  </button>
+</form>
+      </div>
+
+      
+    <% }) %>
+  </div>
+
+</body>
+</html>

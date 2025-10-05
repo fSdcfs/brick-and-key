@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Buy Property</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; padding: 30px;">
+
+  <h2 style="text-align: center; margin-bottom: 20px;">📝 Complete Your Purchase</h2>
+
+  <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; color: #333;"><%= item.title %></h3>
+    <p><strong>📍 Location:</strong> <%= item.location %></p>
+    <p><strong>💰 Price:</strong> ₹<%= item.price %></p>
+
+    <form action="/buy" method="POST">
+      <!-- Hidden fields to pass home ID and title -->
+      <input type="hidden" name="homeId" value="<%= item.id %>">
+      <input type="hidden" name="homeTitle" value="<%= item.title %>">
+
+      <label for="name">👤 Name:</label><br>
+      <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 12px;"><br>
+
+      <label for="email">📧 Email:</label><br>
+      <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 12px;"><br>
+
+      <label for="phone">📞 Phone:</label><br>
+      <input type="text" id="phone" name="phone" required style="width: 100%; padding: 8px; margin-bottom: 12px;"><br>
+
+      <label for="address">🏠 Address:</label><br>
+      <textarea id="address" name="address" required style="width: 100%; padding: 8px; margin-bottom: 20px;"></textarea><br>
+
+      <button type="submit" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">
+        ✅ Confirm Purchase
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
